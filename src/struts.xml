@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ui.theme" value="simple" />
+
+    <package name="default" namespace="/" extends="struts-default">
+    	
+    	<interceptors>
+    		<interceptor name="checkSession" class="project.interceptors.SessionInterceptor"></interceptor>
+    		<interceptor name="checkCookie" class="project.interceptors.CookieInterceptor"></interceptor>
+    		
+    		<interceptor-stack name="cookieSession">
+    			<interceptor-ref name="cookieProvider"></interceptor-ref>
+    			<interceptor-ref name="checkSession"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+		<!-- homepage -->
+		<action name="" class="project.actions.LoginAction">
+			<interceptor-ref name="checkSession"></interceptor-ref>
+			<result name="login">/WEB-INF/jsps/homepage.jsp</result>
+			<result name="success" >/WEB-INF/jsps/welcome.jsp</result>
+		</action>
+		
+		<action name="login" class="project.actions.LoginAction" method="checkLogin">
+			<result name="input">/WEB-INF/jsps/homepage.jsp</result>
+			<result name="success" type="redirectAction">welcome</result>
+			<result name="error">/WEB-INF/jsps/homepage.jsp</result>
+		</action>
+		
+		<action name="logout" class="project.actions.LoginAction" method="logout">
+			<result name="success" >/WEB-INF/jsps/homepage.jsp</result>
+		</action>
+		
+		<action name="welcome" class="project.actions.WelcomeAction">
+			<result name="success" >/WEB-INF/jsps/welcome.jsp</result>
+			<result name="login" >/WEB-INF/jsps/homepage.jsp</result>
+		</action>
+		
+        <!-- <default-action-ref name="index" /> -->
+
+        <!-- <global-results>
+            <result name="error">/WEB-INF/jsp/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings> -->
+
+    </package>
+
+</struts>
