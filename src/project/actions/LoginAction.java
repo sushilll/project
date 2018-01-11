@@ -47,8 +47,8 @@ public class LoginAction extends ActionSupport implements Action, SessionAware, 
 	public void setSession(Map<String, Object> arg0) {
 		this.session = (SessionMap<String, Object>) arg0;
 	}
-
-	public String checkLogin(){
+	@Override
+	public String execute(){
 		/*String test = (String) session.get("userid");
 		if (test != null) {
 			return SUCCESS;
@@ -80,22 +80,16 @@ public class LoginAction extends ActionSupport implements Action, SessionAware, 
 		}
 	}
 	
-	public String logout(){
-		session.remove("userid");
-		session.invalidate();
-		addActionMessage("Successfuly logged out");
-		return SUCCESS;
-	}
 	
 	@Override
 	public Set<Cookie> getCookies() {
-		System.out.println("get Cookies called");
+		/*System.out.println("get Cookies called");
 		if (remember.equals("true")) {
 			Cookie cookie = new Cookie("remember", userid);
 			cookie.setMaxAge(365*24*60*60);
 			cookies.add(cookie);
 			return cookies;
-		}
+		}*/
 		return null;
 	}
 	
