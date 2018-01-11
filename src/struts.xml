@@ -22,13 +22,13 @@
     	</interceptors>
     	
 		<!-- homepage -->
-		<action name="/" class="project.actions.LoginAction">
+		<action name="homepage" class="project.actions.LoginAction">
 			<interceptor-ref name="checkSession"></interceptor-ref>
 			<result name="login">/WEB-INF/jsps/homepage.jsp</result>
 			<result name="success" >/WEB-INF/jsps/welcome.jsp</result>
 		</action>
 		
-		<action name="login" class="project.actions.LoginAction" method="checkLogin">
+		<action name="login" class="project.actions.LoginAction">
 			<result name="input">/WEB-INF/jsps/homepage.jsp</result>
 			<result name="success" type="redirectAction">home</result>
 			<result name="error">/WEB-INF/jsps/homepage.jsp</result>
